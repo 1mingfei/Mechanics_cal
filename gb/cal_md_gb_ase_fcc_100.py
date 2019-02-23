@@ -10,9 +10,9 @@ import ase.io
 import os
 import numpy as np
 import atomman as am
-from utils import stroh_solve
+#from utils import stroh_solve
 from ase import Atoms
-from ase.lattice.orthorhombic import SimpleOrthorhombicFactory
+#from ase.lattice.orthorhombic import SimpleOrthorhombicFactory
 from numpy import sqrt, deg2rad, floor, cos, sin
 import md_pot_data
 import glob
@@ -37,7 +37,7 @@ othoHCPB = othoHCPFractoryB()
 class md_gb_ase_fcc_100(object):
 
     def auto(self):
-        self.build_hcp_ase_100_small()
+        self.build_fcc_ase_100_small()
         # minimie
         self.make_perf()
         # minimie
@@ -446,7 +446,7 @@ class md_gb_ase_fcc_100(object):
     def build_fcc_ase_100(self):
         self.find_angles_100(il=[[1], [1]], jl=[1])    # 58.361
         self.write_100_large(self.ag[0])
-
+'''
     def build_fcc_ase_100_3ABA(self):
         self.find_angles_100(il=[[1], [1]], jl=[1])    # 58.361
         ux = self.pot['ahcp']
@@ -724,3 +724,4 @@ class md_gb_ase_fcc_100(object):
         # try with non periodict boundary conditions
         atoms.set_cell(cell)
         self.write_lmp_config_data(atoms, "lmp_init.txt")
+'''

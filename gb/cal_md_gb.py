@@ -56,9 +56,10 @@ class md_gb(cal_md_gb_pre.md_gb_pre,
     def __init__(self):
         # self.pot = md_pot.mg_Poco
         # self.pot = md_pot.Ti_Ackland
-        #self.pot = md_pot.ti_zope
-        self.pot = md_pot.Ag_Williams
+        # self.pot = md_pot.ti_zope
+        # self.pot = md_pot.Ag_Williams
         # self.pot = md_pot.mg_sun
+        self.pot = md_pot.mg_dickel
         cal_md_gb_pre.md_gb_pre.__init__(self)
         cal_md_gb_pos.md_gb_pos.__init__(self)
         cal_md_gb_run.md_gb_run.__init__(self)
@@ -113,6 +114,7 @@ if __name__ == "__main__":
                   'rep': drv.make_repeat,
                   'loop': drv.loop_init_1100,
                   'loop_fcc_100': drv.loop_init_fcc100,  #-1mingfei 
+                  'loop_1210': drv.loop_init_1210,  #-1mingfei 
                   'del': drv.analysize_atomic_strain,
                   'usp': drv.loop_set_usp_run,
                   'init': drv.loop_grand,
