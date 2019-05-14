@@ -59,7 +59,8 @@ class md_gb(cal_md_gb_pre.md_gb_pre,
         # self.pot = md_pot.ti_zope
         # self.pot = md_pot.Ag_Williams
         # self.pot = md_pot.mg_sun
-        self.pot = md_pot.mg_dickel
+        #self.pot = md_pot.mg_dickel
+        self.pot = md_pot.Cu_Mishin
         cal_md_gb_pre.md_gb_pre.__init__(self)
         cal_md_gb_pos.md_gb_pos.__init__(self)
         cal_md_gb_run.md_gb_run.__init__(self)

@@ -4,35 +4,33 @@
 # @Last Modified by:   1mingfei
 # @Last Modified time: 2018-12-03 14:12:22
 
-#import ase.lattice.orthorhombic as otho
-from ase.lattice.cubic import FaceCenteredCubic
+import ase.lattice.orthorhombic as otho
+#from ase.lattice.cubic import FaceCenteredCubic
 import ase.io
 import os
 import numpy as np
 import atomman as am
 #from utils import stroh_solve
 from ase import Atoms
-#from ase.lattice.orthorhombic import SimpleOrthorhombicFactory
+from ase.lattice.orthorhombic import SimpleOrthorhombicFactory
 from numpy import sqrt, deg2rad, floor, cos, sin
 import md_pot_data
 import glob
 
-'''
 class othoHCPFractory(otho.SimpleOrthorhombicFactory):
     bravais_basis = [[0.0, 0.0, 0.0],
                      [0.5, 0.0, 0.5],
-                     [0.0, 0.5, 1. / 3.],
-                     [0.5, 0.5, 5. / 6.]]
+                     [0.5, 0.5, 0.0],
+                     [0.0, 0.5, 0.5]]
 othoHCP = othoHCPFractory()
 
 
 class othoHCPFractoryB(otho.SimpleOrthorhombicFactory):
     bravais_basis = [[0.0, 0.0, 0.0],
                      [0.5, 0.0, 0.5],
-                     [0.0, 0.5, 2. / 3.],
-                     [0.5, 0.5, 1. / 6.]]
+                     [0.5, 0.5, 0.0],
+                     [0.0, 0.5, 0.5]]
 othoHCPB = othoHCPFractoryB()
-'''
 
 class md_gb_ase_fcc_100(object):
 
@@ -248,8 +246,11 @@ class md_gb_ase_fcc_100(object):
         uz = self.pot['lattice'] #check this -1mingfei
 
         # angle, length, i, j
-        atoms = FaceCenteredCubic(latticeconstant=self.pot['lattice'], size=(
-            130, 130, 2), symbol=self.pot['element'])
+        #atoms = FaceCenteredCubic(latticeconstant=self.pot['lattice'], size=(
+        #    80, 80, 2), symbol=self.pot['element'])
+
+        atoms = othoHCP(latticeconstant=(ux, uy, uz), size=(
+            80, 80, 2), symbol=self.pot['element'])   # for 1100 58.361
 
         atoms.rotate(ag[0], 'z')
         cell = atoms.get_cell()
@@ -264,11 +265,11 @@ class md_gb_ase_fcc_100(object):
         atoms = self.make_cubic('out', atoms, lob, hib)
 
         # the other grain
-        atoms2 = FaceCenteredCubic(latticeconstant=self.pot['lattice'], size=(
-            130, 130, 2), symbol=self.pot['element'])     # for 1100 72.877
+        #atoms2 = FaceCenteredCubic(latticeconstant=self.pot['lattice'], size=(
+        #    80, 80, 2), symbol=self.pot['element'])     # for 1100 72.877
 
-        # atoms2 = othoHCP(latticeconstant=(ux, uy, uz), size=(
-        #     130, 130, 2), symbol=self.pot['element'])   # for 1100 58.361
+        atoms2 = othoHCP(latticeconstant=(ux, uy, uz), size=(
+            130, 130, 2), symbol=self.pot['element'])   # for 1100 58.361
 
         lob = np.array([0.0, 0.5 * cell[1, 1], 0.0])
         hib = np.array([cell[0, 0], cell[1, 1] - 0.2, cell[2, 2]])
